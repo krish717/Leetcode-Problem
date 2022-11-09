@@ -28,7 +28,7 @@ public:
                             if(nums2[j]>nums2[i]){
                                     c=1;
                                     umpp[nums2[i]] = nums2[j];
-                                    j = nums2.size();
+                                  break;
                             }
                     }
                     if(c==0) umpp[nums2[i]] = -1;
