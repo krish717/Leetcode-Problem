@@ -1,7 +1,7 @@
 class Solution {
 public:
     string removeDuplicates(string s, int k) {
-        vector<pair<char, short>> v;
+        vector<pair<char, int>> v;
             for(auto it:s){
                     if(v.empty() || v.back().first!=it){
                             v.push_back({it,0});
