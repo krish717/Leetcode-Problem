@@ -4,9 +4,9 @@ public:
                 
                 if(ind>=cost.size()) return 0;
                 if(dp[ind]!=-1) return dp[ind];
-                int pick =     helper(cost,ind+1,n,dp);
-                int notpick =  helper(cost,ind+2,n,dp);
-                return dp[ind] =  cost[ind] + min(pick, notpick);
+                int pick =    cost[ind]+ helper(cost,ind+1,n,dp);
+                int notpick =  cost[ind]+helper(cost,ind+2,n,dp);
+                return dp[ind] =   min(pick, notpick);
         }
     int minCostClimbingStairs(vector<int>& cost) {
             int n = cost.size();
