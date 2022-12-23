@@ -11,18 +11,28 @@
  */
 class Solution {
 public:
-        void fun(TreeNode* root, int x, int y,int& ans1,int &ans2,int count){
-                if(root==NULL) return;
-                if(root->val==x) ans1 = count;
-                if(root->val==y) ans2 = count;
-                if(root->left && root->right && root->left->val==x && root->right->val==y) return;
-                if(root->left && root->right && root->left->val==y && root->right->val==x) return;
-                fun(root->left,x,y,ans1,ans2,count+1);
-                fun(root->right,x,y,ans1,ans2,count+1);
-        }
     bool isCousins(TreeNode* root, int x, int y) {
-            int ans1 = -1,ans2=-2;
-            fun(root,x,y,ans1,ans2,0);
-            return (ans1==ans2);
+            
+        queue<TreeNode*> q;
+         q.push(root); 
+          while(!q.empty()){
+                  int size = q.size();
+                  bool ans1=false,ans2=false;
+                  for(int i=0; i<size; i++){
+                  root = q.front();
+                  q.pop();
+                  if(root->val==x) ans1=true;
+                  if(root->val==y) ans2=true;
+                  if(root->left && root->right){
+                  if(root->left->val==x && root->right->val==y || root->left->val==y && root->right->val==x)
+                        return false;
+                  }
+                  if(root->left) q.push(root->left);
+                  if(root->right) q.push(root->right);
+                  }
+                  if(ans1 && ans2) return true;
+          } 
+          
+          return false;
     }
 };
