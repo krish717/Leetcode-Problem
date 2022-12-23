@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-        
+       
         void fun(TreeNode* root, int x, int y,int& depth1,int& depth2,int count){
                 if(root==NULL) return;
                 
