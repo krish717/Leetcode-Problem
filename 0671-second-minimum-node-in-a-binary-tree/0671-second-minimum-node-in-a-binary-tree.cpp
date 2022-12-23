@@ -20,12 +20,8 @@ public:
     int findSecondMinimumValue(TreeNode* root) {
              set<int> s;
              helper(s, root);
-             vector<int> v;
-            for(auto it:s){
-                    v.push_back(it);
-            }
-            if(v.size()==1) return -1;
-            else return v[1];
+             if(s.size()==1) return -1;
+            else return *(++s.begin());
              
             
     }
