@@ -25,21 +25,23 @@ class Solution
     int knapSack(int W, int wt[], int val[], int n) 
     { 
        // Your code here
-       vector<vector<int>> dp(n,vector<int>(W+1));
+       vector<int> prev(W+1,0);
+       vector<int> curr(W+1,0);
        for(int i=wt[0]; i<=W; i++){
-           dp[0][i] = val[0];
+           prev[i] = val[0];
        }
        for(int ind=1; ind<n; ind++){
            for(int weight=0; weight<=W; weight++){
-               int notpick = 0 + dp[ind-1][weight];
+               int notpick = 0 + prev[weight];
                 int pick = INT_MIN;
                  if(wt[ind]<=weight){
-             pick  = val[ind] + dp[ind-1][weight-wt[ind]];
+             pick  = val[ind] + prev[weight-wt[ind]];
          }
-         dp[ind][weight] = max(notpick,pick);
+         curr[weight] = max(notpick,pick);
            }
+           prev = curr;
        }
-       return dp[n-1][W];
+       return prev[W];
     }
 };
 
