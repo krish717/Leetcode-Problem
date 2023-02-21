@@ -2,23 +2,25 @@ class Solution {
 public:
 
     int uniquePaths(int m, int n) {
-        vector<vector<int>> dp(m,vector<int>(n,-1));
+        vector<int> prev(n,0);
         // dp[0][0] = 1;
          for(int i=0; i<m; i++){
+             vector<int> curr(n,0);
              for(int j=0; j<n; j++){
                  if(i==0 && j==0)
-                     dp[0][0]=1;
+                    curr[0]=1;
                      else{
                          int pick = 0,notpick=0;
                          if(i>0)
-                          pick +=  dp[i-1][j];
+                          pick +=  prev[j];
                          if(j>0)
-                          notpick +=  dp[i][j-1];
-                         dp[i][j] = pick + notpick;
+                          notpick +=  curr[j-1];
+                         curr[j] = pick + notpick;
                      }
-                 
+              
              }
+                prev = curr;
          }
-        return dp[m-1][n-1];
+        return prev[n-1];
     }
 };
