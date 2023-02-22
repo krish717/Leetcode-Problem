@@ -21,17 +21,6 @@ public:
         vector<vector<int>> dp(n,vector<int>(k+1,-1));
         return helper(n-1,k,nums,dp);
         }
-//         int totalsum = 0;
-//         for(int i=0; i<nums.size(); i++){
-//             totalsum+=nums[i];
-//         }
-        
-//         if(totalsum%2==1) return false;
-//         else{
-//             int k = totalsum/2;
-//             int n = nums.size();
-//             vector<vector<int>> dp(n, vector<int>(k+1, -1));
-//             return subsetSumtoK(n-1,k,nums,dp);
-//     }
+
     }
 };
