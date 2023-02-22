@@ -1,27 +1,32 @@
 class Solution {
 public:
-        bool canPartition(vector<int>& nums) {
-        int totalSum = accumulate(nums.begin(),nums.end(),0);
-          if(totalSum%2!=0) return false;
-                int k = totalSum/2;
-    vector<bool> prev(k+1,0);
-    prev[0] = 1;
-    if(nums[0]<=k)
-    prev[nums[0]] = 1;
-    for(int ind=1; ind<nums.size(); ind++){
-         vector<bool> curr(k+1);
-        curr[0] = 1;
-        for(int target=1; target<=k; target++){
-            bool nottake = prev[target];
-            bool take = false;
-            if(nums[ind]<=target){
-                take = prev[target-nums[ind]];
-            }
-            curr[target] = nottake || take;
+    bool subsetSumtoK(int i,int target,vector<int>& nums,vector<vector<int>>& dp){
+        if(target==0) return true;
+        if(i==0){
+            return nums[i]==target;
         }
-        prev = curr;
+        if(dp[i][target]!=-1) return dp[i][target];
+        
+        bool Nottaken = subsetSumtoK(i-1,target,nums,dp);
+        bool taken = false;
+        
+        if(nums[i]<=target){
+            taken = subsetSumtoK(i-1,target-nums[i],nums,dp);
+        }
+        return dp[i][target] = Nottaken || taken;
     }
-    return prev[k];
-            
+    bool canPartition(vector<int>& nums) {
+        int totalsum = 0;
+        for(int i=0; i<nums.size(); i++){
+            totalsum+=nums[i];
+        }
+        
+        if(totalsum%2==1) return false;
+        else{
+            int k = totalsum/2;
+            int n = nums.size();
+            vector<vector<int>> dp(n, vector<int>(k+1, -1));
+            return subsetSumtoK(n-1,k,nums,dp);
+        }
     }
 };
