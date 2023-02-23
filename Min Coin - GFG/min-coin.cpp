@@ -22,12 +22,28 @@ class Solution{
 	{
 	    // Code here
 	    int n = nums.size();
-	    vector<vector<int>> dp(n,vector<int>(amount+1,-1));
-	    long long int ans =  helper(n-1,amount,nums,dp);
-	    if(ans==1000000000){
+	    vector<vector<int>> dp(n,vector<int>(amount+1));
+	    for(int i=0; i<=amount; i++){
+	        if(i%nums[0]==0){
+	            dp[0][i] = i/nums[0];
+	        }else{
+	            dp[0][i] = 1e9;
+	        }
+	    }
+	    for(int ind=1; ind<n; ind++){
+	        for(int a=0; a<=amount; a++){
+	            int notpick = 0 + dp[ind-1][a];
+	            int pick = INT_MAX;
+	            if(nums[ind]<=a){
+	            pick = 1 + dp[ind][a-nums[ind]];
+	           }
+	            dp[ind][a] = min(notpick,pick);
+	        }
+	    }
+	    if(dp[n-1][amount]==1000000000){
 	        return -1;
 	    }else{
-	        return ans;
+	        return dp[n-1][amount];
 	    }
 	}
 };
