@@ -22,28 +22,30 @@ class Solution{
 	{
 	    // Code here
 	    int n = nums.size();
-	    vector<vector<int>> dp(n,vector<int>(amount+1));
+	    vector<int> prev(amount+1);
 	    for(int i=0; i<=amount; i++){
 	        if(i%nums[0]==0){
-	            dp[0][i] = i/nums[0];
+	            prev[i] = i/nums[0];
 	        }else{
-	            dp[0][i] = 1e9;
+	            prev[i] = 1e9;
 	        }
 	    }
 	    for(int ind=1; ind<n; ind++){
+	        vector<int> curr(amount+1);
 	        for(int a=0; a<=amount; a++){
-	            int notpick = 0 + dp[ind-1][a];
+	            int notpick = 0 + prev[a];
 	            int pick = INT_MAX;
 	            if(nums[ind]<=a){
-	            pick = 1 + dp[ind][a-nums[ind]];
+	            pick = 1 + curr[a-nums[ind]];
 	           }
-	            dp[ind][a] = min(notpick,pick);
+	            curr[a] = min(notpick,pick);
 	        }
+	        prev= curr;
 	    }
-	    if(dp[n-1][amount]==1000000000){
+	    if(prev[amount]==1000000000){
 	        return -1;
 	    }else{
-	        return dp[n-1][amount];
+	        return prev[amount];
 	    }
 	}
 };
