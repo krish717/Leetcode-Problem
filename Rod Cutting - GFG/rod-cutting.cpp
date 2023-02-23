@@ -24,22 +24,24 @@ class Solution{
     int cutRod(int price[], int n) {
         //code here
   
-        vector<vector<int>> dp(n,vector<int>(n+1));
+        vector<int> prev(n+1);
         for(int i=0; i<=n; i++){
-            dp[0][i] = price[0]*i;
+            prev[i] = price[0]*i;
         }
         for(int ind=1; ind<n; ind++){
+             vector<int> curr(n+1);
             for(int tar=0; tar<=n; tar++){
-                int notpick = 0 + dp[ind-1][tar];
+                int notpick = 0 + prev[tar];
       int pick = -1e9;
       int rodlength = ind+1;
       if(rodlength<=tar){
-          pick = price[ind] + dp[ind][tar-rodlength];
+          pick = price[ind] + curr[tar-rodlength];
       }
-       dp[ind][tar] = max(notpick,pick);
+       curr[tar] = max(notpick,pick);
             }
+            prev= curr;
         }
-        return dp[n-1][n];
+        return prev[n];
     }
 };
 
