@@ -29,10 +29,10 @@ public:
         return res;
     }
     vector<int> searchRange(vector<int>& nums, int target) {
-        if(nums.size()==0) return {-1,-1};
-        if(nums.size()==1 && target!=nums[0]){
-            return {-1,-1};
-        }
+        // if(nums.size()==0) return {-1,-1};
+        // if(nums.size()==1 && target!=nums[0]){
+        //     return {-1,-1};
+        // }
         int firstpos = first(nums,target);
         int secondpos = second(nums,target);
         return {firstpos,secondpos};
