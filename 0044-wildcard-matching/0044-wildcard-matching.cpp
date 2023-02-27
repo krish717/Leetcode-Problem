@@ -24,9 +24,10 @@ public:
         int m=p.size();
         vector<bool> prev(m+1,false);
         vector<bool> curr(m+1,false);
-       for(int i = 1; i<m+1; ++i){
+        
+       for(int i = 1; i<=m; i++){
             bool flag = true;
-            for(int ii = 1; ii<=i; ++ii){
+            for(int ii = 1; ii<=i; ii++){
                 if(p[ii-1]!='*'){
                     flag = false;
                     break;
