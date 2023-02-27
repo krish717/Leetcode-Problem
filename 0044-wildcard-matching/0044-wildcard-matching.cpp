@@ -2,8 +2,8 @@ class Solution {
 public:
     bool helper(int i,int j,string &s, string &p,vector<vector<int>>& dp){
         if(i==0 && j==0) return true;
-        if(j==0) return false;
-        if(i==0){
+        if(j==0 && i>0) return false;
+        if(i==0 && j>0){
             for(int k=1; k<=j; k++){
                 if(p[k-1]!='*') return false;
                }
