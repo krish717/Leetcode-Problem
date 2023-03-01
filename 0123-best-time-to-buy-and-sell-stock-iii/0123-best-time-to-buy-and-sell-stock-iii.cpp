@@ -17,16 +17,16 @@ public:
         
         //Tabulation
         //base case
-        // for(int i=0; i<n; i++){
-        //     for(int buy=0; buy<2; buy++){
-        //         dp[i][buy][0] = 0;
-        //     }
-        // }
-        // for(int buy=0; buy<2; buy++){
-        //     for(int cap=0; cap<2; cap++){
-        //         dp[n][buy][cap] = 0;
-        //     }
-        // }
+        for(int i=0; i<n; i++){
+            for(int buy=0; buy<2; buy++){
+                dp[i][buy][0] = 0;
+            }
+        }
+        for(int buy=0; buy<2; buy++){
+            for(int cap=0; cap<2; cap++){
+                dp[n][buy][cap] = 0;
+            }
+        }
         for(int ind=n-1; ind>=0; ind--){
             for(int buy=1; buy>=0; buy--){
                 for(int cap=2; cap>=1; cap--){
