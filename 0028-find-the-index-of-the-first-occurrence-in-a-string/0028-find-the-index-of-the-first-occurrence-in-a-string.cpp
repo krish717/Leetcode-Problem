@@ -10,9 +10,9 @@ public:
                 i++;
                 j++;
             }
-            string  a = haystack.substr(k, needle.size());
+            // string  a = haystack.substr(k, needle.size());
             
-            if(a==needle) return k;
+            if(haystack.substr(k, needle.size())==needle) return k;
             i=k+1;
             
         }
