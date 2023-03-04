@@ -45,6 +45,6 @@ public:
             }
             prev=curr;
         }
-        return curr[-1+1];
+        return prev[-1+1];
     }
 };
