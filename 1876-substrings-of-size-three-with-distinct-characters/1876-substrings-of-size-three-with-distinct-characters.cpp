@@ -13,6 +13,7 @@ public:
             else if(j-i+1==k){
                 if(um.size()==k){
                     ans++;
+                    if(um.find(s[i])!=um.end())
                     um.erase(s[i]);
                          i++;
                          j++;  
