@@ -11,18 +11,18 @@
  */
 class Solution {
 public:
-        int fun(TreeNode* root){
-                if(root==NULL) return 0;
-                 int left = fun(root->left);
-            int right = fun(root->right);
-                if(left==-1 || right==-1) return -1;
-            if(abs(left-right)>1) return -1;
-           
-            return 1+max(left,right);
-        }
+    int height(TreeNode* root){
+        if(root==NULL) return 0;
+        return 1+max(height(root->left),height(root->right));
+    }
     bool isBalanced(TreeNode* root) {
         if(root==NULL) return true;
-            if(fun(root)!=-1) return true;
-            else return false;
+        int left = height(root->left);
+        int right = height(root->right);
+        if(abs(left-right)>1) return false;
+        bool left1 = isBalanced(root->left);
+         bool right1 =  isBalanced(root->right);
+        if(!left1 || !right1) return false;
+        return true;
     }
 };
