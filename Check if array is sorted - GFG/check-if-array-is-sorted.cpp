@@ -11,11 +11,11 @@ class Solution {
   public:
     bool arraySortedOrNot(int arr[], int n) {
         // code here
-        for(int i=n-1; i>0; i--){
-            if(arr[i]>=arr[i-1]) continue;
-            else return 0;
+        if(n==0 || n==1) return true;
+        if(arr[0]>arr[1]){
+            return false;
         }
-        return 1;
+        return arraySortedOrNot(arr+1,n-1);
     }
 };
 
