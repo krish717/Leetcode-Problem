@@ -11,28 +11,30 @@
  */
 class Solution {
 public:
-    int findposition(vector<int>& inorder,int element){
+    void createMapping(vector<int>& inorder,map<int,int>& mp){
         for(int i=0; i<inorder.size(); i++){
-            if(element==inorder[i]) return i;
+            mp[inorder[i]] = i;
         }
-        return -1;
+        
     }
-    TreeNode* solve(vector<int>& preorder, vector<int>& inorder,int &index,int inorderstart,int inorderend){
+    TreeNode* solve(vector<int>& preorder, vector<int>& inorder,int &index,int inorderstart,int inorderend,map<int,int>& mp){
         if(index>preorder.size() || inorderstart>inorderend){
             return NULL;
         }
         
         int element = preorder[index++];
         TreeNode* root = new TreeNode(element);
-        int position = findposition(inorder,element);
+        int position = mp[element];
         
-        root->left = solve(preorder,inorder,index,inorderstart,position-1);
-        root->right = solve(preorder,inorder,index,position+1,inorderend);
+        root->left = solve(preorder,inorder,index,inorderstart,position-1,mp);
+        root->right = solve(preorder,inorder,index,position+1,inorderend,mp);
         return root;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int index=0;
-        TreeNode* ans = solve(preorder,inorder,index,0,inorder.size()-1);
+        map<int,int> mp;
+        createMapping(inorder,mp);
+        TreeNode* ans = solve(preorder,inorder,index,0,inorder.size()-1,mp);
         return ans;
     }
 };
