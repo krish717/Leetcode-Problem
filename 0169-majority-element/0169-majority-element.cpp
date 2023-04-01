@@ -1,20 +1,18 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        unordered_map<int,int> um;
+        int value = nums[0];
+        int count=0;
         for(int i=0; i<nums.size(); i++){
-            um[nums[i]]++;
-        }
-        int maxi=0;
-        int val=0;
-        for(int i=0; i<nums.size(); i++){
-            if(um.find(nums[i])!=um.end()){
-                if(maxi<um[nums[i]]){
-                maxi = um[nums[i]];
-                val = nums[i];
+            if(value==nums[i]) count++;
+            else{
+                count--;
+                if(count==0){
+                    value = nums[i];
+                    count=1;
                 }
             }
         }
-        return val;
+        return value;
     }
 };
