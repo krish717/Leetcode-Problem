@@ -52,43 +52,33 @@ Node *mergetwoLinkedList(Node *head1, Node *head2)
       if(!head2){ return head1; }
       Node *temp1 = head1;
       Node *temp2 = head2;
-      Node *headmain = NULL;
+      Node* newNode = new Node(-11);
+      Node *headmain = newNode;
       Node *tailmain = NULL;
       while(temp1!=NULL && temp2!=NULL){
-            if(headmain==NULL){
+            
                   if(temp1->data<temp2->data)
                   {
-                        headmain = temp1;
-                        tailmain = temp1;
+                        headmain->next = temp1;
+                        headmain = headmain->next;
                         temp1=temp1->next;
                   }else{
-                         headmain = temp2;
-                        tailmain = temp2;
+                         headmain->next = temp2;
+                        headmain = headmain->next;
                         temp2=temp2->next;
                   }
-            }
-                  else
-                  {
-                       if(temp1->data<temp2->data)
-                       {
-                            tailmain->next = temp1;
-                            tailmain = tailmain->next;
-                            temp1=temp1->next;
-                       }else{
-                             tailmain->next = temp2;
-                            tailmain = tailmain->next;
-                            temp2=temp2->next;
-                       }
-                       
-                  }
+            
+                 
             }
            if(temp2 != NULL) {
-        tailmain->next = temp2;
+        headmain->next = temp2;
+         headmain = headmain->next;
     }
     if(temp1 != NULL) {
-        tailmain->next = temp1;
+       headmain->next = temp1;
+         headmain = headmain->next;
     }
-      return headmain;
+      return newNode->next;
       }
     Node* segregate(Node *head) {
         
