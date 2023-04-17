@@ -1,19 +1,7 @@
 class Solution {
 public:
     bool checkInclusion(string pat, string txt) {
-        // int i=0,j=0;
-        // bool ans = false;
-        // int k = s1.size();
-        // int n = s2.size();
-        // vector<char> v;
-        // while(j<n){
-        //     v.push_back(s2[j]);
-        //     if(j-i+1<k) j++;
-        //     else if(j-i+1==k){
-        //         sort(v.begin(),v.end());
-        //         v
-        //     }
-        // }
+       
          int ans=0,i=0,j=0;
 	    int n = txt.size();
 	    unordered_map<char,int> um;
@@ -30,7 +18,10 @@ public:
 	        
 	        if(j-i+1<k) j++;
 	        else{
-	            if(count==0) ans++;
+	            if(count==0){
+                     ans++;
+                    break;
+                }
 	            if(um.find(txt[i])!=um.end()){
 	                um[txt[i]]++;
 	                if(um[txt[i]]==1) count++;
