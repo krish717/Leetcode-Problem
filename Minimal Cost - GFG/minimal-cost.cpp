@@ -20,8 +20,19 @@ class Solution {
   }
     int minimizeCost(vector<int>& height, int n, int k) {
         // Code here
-        vector<int> dp(n+1,-1);
-        return helper(n-1,height,k,dp);
+        vector<int> dp(n+1,0);
+        dp[0] = 0;
+        for(int ind=1; ind<n; ind++){
+            int ministeps = INT_MAX;
+             for(int j=1; j<=k; j++){
+          if(ind-j>=0){
+          int jump = helper(ind-j,height,k,dp)+abs(height[ind]-height[ind-j]);
+           ministeps = min(jump,ministeps);
+          }
+      }
+      dp[ind] = ministeps;
+        }
+        return dp[n-1];
     }
 };
 
