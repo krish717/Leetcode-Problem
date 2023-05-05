@@ -9,22 +9,21 @@ using namespace std;
 
 class Solution{   
 public:
-bool fun(int ind, int k, vector<int> &arr,vector<vector<int>>& dp){
-    if(k==0) return true;
-    if(ind==0) return k==arr[ind];
-    if(dp[ind][k]!=-1) return dp[ind][k];
-    bool nottake = fun(ind-1,k,arr,dp);
-    bool take = false;
-    if(k>=arr[ind])
-     take = fun(ind-1,k-arr[ind],arr,dp);
-    return dp[ind][k] = nottake || take;
+int helper(int ind,vector<int>arr, int sum,vector<vector<int>>& dp){
+    if(sum==0) return true;
+    if(ind==0) return (arr[0]==sum);
+    if(dp[ind][sum]!=-1) return dp[ind][sum];
+    int notpick = helper(ind-1,arr,sum,dp);
+    int pick = false;
+    if(sum>=arr[ind])
+     pick = helper(ind-1,arr,sum-arr[ind],dp);
+     return dp[ind][sum] = notpick || pick;
 }
     bool isSubsetSum(vector<int>arr, int sum){
         // code here 
-        int k = sum;
-        int n=arr.size();
-        vector<vector<int>> dp(n,vector<int>(k+1,-1));
-    return fun(n-1,k,arr,dp);
+        int n = arr.size();
+        vector<vector<int>> dp(n,vector<int>(sum+1,-1));
+        return helper(n-1,arr,sum,dp);
     }
 };
 
